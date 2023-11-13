@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="340c7912-fe68-4214-8366-4e67783702b4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3_AaSD.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tree/AVL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tree/Binary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tree/BinaryTree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tree/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tree/RedBlack.java" afterDir="false" />
+    <list default="true" id="340c7912-fe68-4214-8366-4e67783702b4" name="Changes" comment=".">
+      <change afterPath="$PROJECT_DIR$/src/tree/AVLTree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tree/RedBlackTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tree/AVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/AVL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tree/BinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/BinaryTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tree/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tree/RedBlack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/RedBlack.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +62,18 @@
       <option name="presentableId" value="Default" />
       <updated>1699547489857</updated>
     </task>
+    <task id="LOCAL-00001" summary=".">
+      <created>1699791874587</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699791874587</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
 </project>

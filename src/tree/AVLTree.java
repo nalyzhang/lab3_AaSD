@@ -1,46 +1,47 @@
 package tree;
 
-import tree.Binary;
+import tree.AVL;
 
-public class BinaryTree {
+public class AVLTree {
 
-    private Binary root;
+    private AVL root;
 
-    BinaryTree(int x) {
-        Binary tree = new Binary(x);
-        this.root = tree;
+    AVLTree(int x) {
+        this.root = new AVL(x);
     }
-    public Binary getRoot() {
+        public AVL getRoot() {
         return root;
     }
 
-    public Binary BinarySearch(Binary bin, int numb) {
+    public AVL AVLSearch(AVL bin, int numb) {
         if (bin == null || numb == bin.key) {
             return bin;
         }
-        if (numb < bin.key) return BinarySearch(bin.left_child, numb);
-        else return BinarySearch(bin.right_child, numb);
+        if (numb < bin.key) return AVLSearch(bin.left_child, numb);
+        else return AVLSearch(bin.right_child, numb);
     }
 
-    public Binary BinaryMinimum(Binary bin) {
+    public AVL AVLMinimum(AVL bin) {
         while (bin.left_child != null) bin = bin.left_child;
         return bin;
     }
 
-    public Binary BinaryMaximum(Binary bin) {
+    public AVL AVLMaximum(AVL bin) {
         while (bin.right_child != null) bin = bin.right_child;
         return bin;
     }
 
-    public void BinaryInsert(Binary node) {
-        Binary x = this.root;
+
+    // вставка
+    public void AVLInsert(AVL node) {
+        AVL x = this.root;
         while (true) {
             if (node.key > x.key) {
                 if (x.right_child != null) x = x.right_child;
                 else {
                     node.parent = x;
                     x.right_child = node;
-                    return;
+                    break;
                 }
             }
             else if (node.key < x.key) {
@@ -48,18 +49,24 @@ public class BinaryTree {
                 else {
                     node.parent = x;
                     x.left_child = node;
-                    return;
+                    break;
                 }
             }
         }
+        AVLFixDelete(node);
+    }
+
+    // todo
+    public void AVLFixInsert(AVL node) {
+
     }
 
     //последующий эл-т
-    public Binary BinarySuccessor(Binary node) {
-        if (node.key == BinaryMaximum(this.root).key) return node;
+    public AVL AVLSuccessor(AVL node) {
+        if (node.key == AVLMaximum(this.root).key) return node;
         if (node.right_child != null)
-            return BinaryMinimum(node.right_child);
-        Binary parent = node.parent;
+            return AVLMinimum(node.right_child);
+        AVL parent = node.parent;
         while (parent != null && node == parent.right_child) {
             node = parent;
             parent = parent.parent;
@@ -68,10 +75,10 @@ public class BinaryTree {
     }
 
     //предыдущий эл-т
-    public Binary BinaryPredecessor(Binary node) {
-        if (node.key == BinaryMinimum(this.root).key) return node;
-        if (node.left_child != null) return BinaryMaximum(node.left_child);
-        Binary parent = node.parent;
+    public AVL AVLPredecessor(AVL node) {
+        if (node.key == AVLMinimum(this.root).key) return node;
+        if (node.left_child != null) return AVLMaximum(node.left_child);
+        AVL parent = node.parent;
         while (parent != null && node == parent.left_child) {
             node = parent;
             parent = parent.parent;
@@ -80,8 +87,8 @@ public class BinaryTree {
     }
 
     //удаление
-    public void BinaryDelete(Binary node) {
-        Binary parent = node.parent;
+    public void AVLDelete(AVL node) {
+        AVL parent = node.parent;
         // 1 - удаляемый эл-т - лист
         if (node.left_child == null && node.right_child == null) {
             if (parent.left_child == node) parent.left_child = null;
@@ -101,7 +108,7 @@ public class BinaryTree {
         }
         // 3 - удаляемый эл-т имеет двух потомков
         else {
-            Binary successor = BinarySuccessor(node);
+            AVL successor = AVLSuccessor(node);
             node.key = successor.key;
             if (successor.parent.left_child == successor) {
                 successor.parent.left_child = successor.right_child;
@@ -111,56 +118,62 @@ public class BinaryTree {
                 if (successor.right_child != null) successor.right_child.parent = successor.parent;
             }
         }
+        AVLFixDelete(node);
+    }
+
+    //todo
+    public void AVLFixDelete(AVL node) {
+
     }
 
     //обход в ширину
-    public void BinaryWidthTraversal() {
-        int h = BinaryTreeHeight(this.root);
-        for (int i = 1; i <= h; i++) BinaryCurrentLevel(this.root, i);
+    public void AVLWidthTraversal() {
+        int h = AVLTreeHeight(this.root);
+        for (int i = 1; i <= h; i++) AVLCurrentLevel(this.root, i);
     }
 
-    public void BinaryCurrentLevel(Binary root, int level) {
+    public void AVLCurrentLevel(AVL root, int level) {
         if (root == null) return;
         if (level == 1) System.out.println(root.key);
         else if (level > 1) {
-            BinaryCurrentLevel(root.left_child, level - 1);
-            BinaryCurrentLevel(root.right_child, level - 1);
+            AVLCurrentLevel(root.left_child, level - 1);
+            AVLCurrentLevel(root.right_child, level - 1);
         }
     }
 
     //прямой обход в глубину
     //обход узлов в порядке: вершина, левое поддерево, правое поддерево
-    public void BinaryPreorder(Binary node) {
+    public void AVLPreorder(AVL node) {
         if (node != null) {
             System.out.println(node.key);
-            BinaryPreorder(node.left_child);
-            BinaryPreorder(node.right_child);
+            AVLPreorder(node.left_child);
+            AVLPreorder(node.right_child);
         }
     }
 
     // обратный обход в глубину
     // обход узлов в порядке: левое поддерево, правое поддерево, вершина
-    public void BinaryPostorder(Binary node) {
+    public void AVLPostorder(AVL node) {
         if (node != null){
-            BinaryPostorder(node.left_child);
-            BinaryPostorder(node.right_child);
+            AVLPostorder(node.left_child);
+            AVLPostorder(node.right_child);
             System.out.println(node.key);
         }
     }
 
     //симметричный обход в глубину
     // обход узлов в отсортированном порядке
-    public void BinaryInorder(Binary node) {
+    public void AVLInorder(AVL node) {
         if (node != null) {
-            BinaryInorder(node.left_child);
+            AVLInorder(node.left_child);
             System.out.println(node.key);
-            BinaryInorder(node.right_child);
+            AVLInorder(node.right_child);
         }
     }
 
     //правый поворот
-    public void BinaryRightRotation(Binary node) {
-        Binary b = node.left_child;
+    public void AVLRightRotation(AVL node) {
+        AVL b = node.left_child;
         node.left_child = b.right_child;
         if (b.right_child != null) b.right_child.parent = node;
         b.parent = node.parent;
@@ -172,8 +185,8 @@ public class BinaryTree {
     }
 
     //левый поворот
-    public void BinaryLeftRotation(Binary node) {
-        Binary b = node.right_child;
+    public void AVLLeftRotation(AVL node) {
+        AVL b = node.right_child;
         node.right_child = b.left_child;
         if (b.left_child != null) b.left_child.parent = node;
         b.parent = node.parent;
@@ -185,50 +198,52 @@ public class BinaryTree {
     }
 
     //большой правый поворот
-    public void BinaryBigRightRotation(Binary node) {
-        BinaryLeftRotation(node.right_child);
-        BinaryRightRotation(node);
+    public void AVLBigRightRotation(AVL node) {
+        AVLLeftRotation(node.right_child);
+        AVLRightRotation(node);
     }
 
-    //большой левый поворот
-    public void BinaryBigLeftRotation(Binary node) {
-        BinaryRightRotation(node.left_child);
-        BinaryLeftRotation(node);
+    //большой левый
+    public void AVLBigLeftRotation(AVL node) {
+        AVLRightRotation(node.left_child);
+        AVLLeftRotation(node);
     }
 
     //высота дерева
-    public int BinaryTreeHeight(Binary node) {
+    public int AVLTreeHeight(AVL node) {
         if (node == null) {
             return 0;
         }
-        return (1 + Math.max(BinaryTreeHeight(node.left_child), BinaryTreeHeight(node.right_child)));
+        return (1 + Math.max(AVLTreeHeight(node.left_child), AVLTreeHeight(node.right_child)));
     }
 
-    public void BinaryPrint(String pr, Binary node, boolean left) {
+    public void AVLPrint(String pr, AVL node, boolean left) {
         if (node == null) return;
         else {
             if (left) pr += "l ";
             else pr += "r ";
             System.out.print(pr);
             System.out.println(node.key);
-            BinaryPrint(pr, node.right_child, false);
-            BinaryPrint(pr, node.left_child, true);
+            AVLPrint(pr, node.right_child, false);
+            AVLPrint(pr, node.left_child, true);
         }
     }
 
-    public void BinaryPrintSuccessor(Binary node) {
+    public void AVLPrintSuccessor(AVL node) {
         if (node != null) {
-            BinaryPrintSuccessor(node.left_child);
-            System.out.println("Для элемента " + node.key + " следующий " + BinarySuccessor(node).key);
-            BinaryPrintSuccessor(node.right_child);
+            AVLPrintSuccessor(node.left_child);
+            System.out.println("Для элемента " + node.key + " следующий " + AVLSuccessor(node).key);
+            AVLPrintSuccessor(node.right_child);
         }
     }
 
-    public void BinaryPrintPredecessor(Binary node) {
+    public void AVLPrintPredecessor(AVL node) {
         if (node != null) {
-            BinaryPrintPredecessor(node.left_child);
-            System.out.println("Для элемента " + node.key + " предыдущий " + BinaryPredecessor(node).key);
-            BinaryPrintPredecessor(node.right_child);
+            AVLPrintPredecessor(node.left_child);
+            System.out.println("Для элемента " + node.key + " предыдущий " + AVLPredecessor(node).key);
+            AVLPrintPredecessor(node.right_child);
         }
     }
+
+
 }
