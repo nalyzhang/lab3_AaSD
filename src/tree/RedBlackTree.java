@@ -243,7 +243,9 @@ public class RedBlackTree {
 
     public void RedBlackCurrentLevel(RedBlack root, int level) {
         if (root == null) return;
-        if (level == 1) System.out.println(root.key);
+        if (level == 1) {
+            int i = root.key;
+        }
         else if (level > 1) {
             RedBlackCurrentLevel(root.left_child, level - 1);
             RedBlackCurrentLevel(root.right_child, level - 1);
@@ -254,7 +256,7 @@ public class RedBlackTree {
     //обход узлов в порядке: вершина, левое поддерево, правое поддерево
     public void RedBlackPreorder(RedBlack node) {
         if (node != null) {
-            System.out.println(node.key);
+//            System.out.println(node.key);
             RedBlackPreorder(node.left_child);
             RedBlackPreorder(node.right_child);
         }
@@ -266,7 +268,7 @@ public class RedBlackTree {
         if (node != null){
             RedBlackPostorder(node.left_child);
             RedBlackPostorder(node.right_child);
-            System.out.println(node.key);
+//            System.out.println(node.key);
         }
     }
 
@@ -275,15 +277,16 @@ public class RedBlackTree {
     public void RedBlackInorder(RedBlack node) {
         if (node != null) {
             RedBlackInorder(node.left_child);
-            if (node.black) System.out.print(" black ");
-            else System.out.print(" red ");
-            System.out.println(node.key);
+//            if (node.black) System.out.print(" black ");
+//            else System.out.print(" red ");
+//            System.out.println(node.key);
             RedBlackInorder(node.right_child);
         }
     }
 
     //правый поворот
     public void RedBlackRightRotation(RedBlack node) {
+        if (node.left_child == null || node.left_child.right_child == null) return;
         RedBlack b = node.left_child;
         node.left_child = b.right_child;
         if (b.right_child != null) b.right_child.parent = node;
@@ -333,10 +336,10 @@ public class RedBlackTree {
         else {
             if (left) pr += "l ";
             else pr += "r ";
-            System.out.print(pr);
-            if (node.black) System.out.print(" black ");
-            else System.out.print(" red ");
-            System.out.println(node.key);
+//            System.out.print(pr);
+//            if (node.black) System.out.print(" black ");
+//            else System.out.print(" red ");
+            //System.out.println(node.key);
             RedBlackPrint(pr, node.right_child, false);
             RedBlackPrint(pr, node.left_child, true);
         }
@@ -345,7 +348,7 @@ public class RedBlackTree {
     public void RedBlackPrintSuccessor(RedBlack node) {
         if (node != null) {
             RedBlackPrintSuccessor(node.left_child);
-            System.out.println("Для элемента " + node.key + " следующий " + RedBlackSuccessor(node).key);
+            //System.out.println("Для элемента " + node.key + " следующий " + RedBlackSuccessor(node).key);
             RedBlackPrintSuccessor(node.right_child);
         }
     }
@@ -353,7 +356,7 @@ public class RedBlackTree {
     public void RedBlackPrintPredecessor(RedBlack node) {
         if (node != null) {
             RedBlackPrintPredecessor(node.left_child);
-            System.out.println("Для элемента " + node.key + " предыдущий " + RedBlackPredecessor(node).key);
+            //System.out.println("Для элемента " + node.key + " предыдущий " + RedBlackPredecessor(node).key);
             RedBlackPrintPredecessor(node.right_child);
         }
     }

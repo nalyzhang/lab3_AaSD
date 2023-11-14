@@ -13,6 +13,6 @@ public class AVL {
         this.left_child = null;
         this.right_child = null;
         this.parent = null;
-        this.balance = 0;
+        this.balance = 1;
     }
 }

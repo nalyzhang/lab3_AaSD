@@ -121,7 +121,9 @@ public class BinaryTree {
 
     public void BinaryCurrentLevel(Binary root, int level) {
         if (root == null) return;
-        if (level == 1) System.out.println(root.key);
+        if (level == 1) {
+            int i = root.key;
+        }
         else if (level > 1) {
             BinaryCurrentLevel(root.left_child, level - 1);
             BinaryCurrentLevel(root.right_child, level - 1);
@@ -132,7 +134,7 @@ public class BinaryTree {
     //обход узлов в порядке: вершина, левое поддерево, правое поддерево
     public void BinaryPreorder(Binary node) {
         if (node != null) {
-            System.out.println(node.key);
+            //System.out.println(node.key);
             BinaryPreorder(node.left_child);
             BinaryPreorder(node.right_child);
         }
@@ -144,7 +146,7 @@ public class BinaryTree {
         if (node != null){
             BinaryPostorder(node.left_child);
             BinaryPostorder(node.right_child);
-            System.out.println(node.key);
+            //System.out.println(node.key);
         }
     }
 
@@ -153,7 +155,7 @@ public class BinaryTree {
     public void BinaryInorder(Binary node) {
         if (node != null) {
             BinaryInorder(node.left_child);
-            System.out.println(node.key);
+            //System.out.println(node.key);
             BinaryInorder(node.right_child);
         }
     }
@@ -209,8 +211,8 @@ public class BinaryTree {
         else {
             if (left) pr += "l ";
             else pr += "r ";
-            System.out.print(pr);
-            System.out.println(node.key);
+            //System.out.print(pr);
+            //System.out.println(node.key);
             BinaryPrint(pr, node.right_child, false);
             BinaryPrint(pr, node.left_child, true);
         }
@@ -219,7 +221,7 @@ public class BinaryTree {
     public void BinaryPrintSuccessor(Binary node) {
         if (node != null) {
             BinaryPrintSuccessor(node.left_child);
-            System.out.println("Для элемента " + node.key + " следующий " + BinarySuccessor(node).key);
+            //System.out.println("Для элемента " + node.key + " следующий " + BinarySuccessor(node).key);
             BinaryPrintSuccessor(node.right_child);
         }
     }
@@ -227,7 +229,7 @@ public class BinaryTree {
     public void BinaryPrintPredecessor(Binary node) {
         if (node != null) {
             BinaryPrintPredecessor(node.left_child);
-            System.out.println("Для элемента " + node.key + " предыдущий " + BinaryPredecessor(node).key);
+            //System.out.println("Для элемента " + node.key + " предыдущий " + BinaryPredecessor(node).key);
             BinaryPrintPredecessor(node.right_child);
         }
     }
