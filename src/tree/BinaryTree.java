@@ -211,8 +211,8 @@ public class BinaryTree {
         else {
             if (left) pr += "l ";
             else pr += "r ";
-            //System.out.print(pr);
-            //System.out.println(node.key);
+            System.out.print(pr);
+            System.out.println(node.key);
             BinaryPrint(pr, node.right_child, false);
             BinaryPrint(pr, node.left_child, true);
         }

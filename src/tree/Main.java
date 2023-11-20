@@ -34,25 +34,23 @@ public class Main {
             Binary node = new Binary(array[i]);
             tree.BinaryInsert(node);
         }
-        //tree.BinaryPrint(,tree.getRoot(),false);
+        tree.BinaryPrint("",tree.getRoot(),false);
 
-        long startTime, endTime, timeElapsed = 0;
-        long startTime1, endTime1, timeElapsed1 = 0;
-        long startTime2, endTime2, timeElapsed2 = 0;
+        long startTime, endTime, timeElapsed;
         Binary node;
 
-        node = new Binary(number);
+//        node = new Binary(number);
+//        startTime = System.nanoTime();
+//        tree.BinaryInsert(node);
+//        endTime = System.nanoTime();
+//        timeElapsed = endTime - startTime;
         startTime = System.nanoTime();
-        tree.BinaryInsert(node);
+        tree.BinaryDelete(tree.getRoot());
         endTime = System.nanoTime();
         timeElapsed = endTime - startTime;
-//        startTime1 = System.nanoTime();
-//        tree.BinaryDelete(tree.BinarySearch(tree.getRoot(), number));
-//        endTime1 = System.nanoTime();
-//        timeElapsed1 = endTime1 - startTime1;
 
+//        System.out.println(timeElapsed);
         System.out.println(timeElapsed);
-        //System.out.println("Удаление \n" + (timeElapsed1));
 
         //System.out.println("Максимальное значение: " + tree.BinaryMaximum(tree.getRoot()).key);
         //System.out.println("Минимальное значение: " + tree.BinaryMinimum(tree.getRoot()).key);
@@ -97,7 +95,7 @@ public class Main {
 //        tree.BinaryPrintPredecessor(tree.getRoot());
 //        System.out.println();
 //
-//        System.out.println("Высота дерева");
+//        System.out.println(tree.BinaryTreeHeight(tree.getRoot()));
 //        startTime = System.nanoTime();
 //        int h = tree.BinaryTreeHeight(tree.getRoot());
 //        endTime = System.nanoTime();
@@ -112,26 +110,27 @@ public class Main {
         for (int i = 1; i < array.length; i++) {
             RedBlack node = new RedBlack(array[i]);
             tree.RedBlackInsert(node);
+//            tree.RedBlackPrint("", tree.getRoot(), false);
+//            System.out.println();
         }
         //tree.RedBlackDelete(tree.RedBlackSearch(tree.getRoot(), 4));
-        //tree.RedBlackPrint(, tree.getRoot(), false);
 
         long startTime, endTime, timeElapsed = 0;
         long startTime1, endTime1, timeElapsed1 = 0;
         RedBlack node;
 
         node = new RedBlack(number);
-        startTime = System.nanoTime();
+//        startTime = System.nanoTime();
         tree.RedBlackInsert(node);
-        endTime = System.nanoTime();
-        timeElapsed = endTime - startTime;
+//        endTime = System.nanoTime();
+//        timeElapsed = endTime - startTime;
 //        startTime1 = System.nanoTime();
-//        tree.RedBlackDelete(tree.RedBlackSearch(tree.getRoot(), number));
+//        tree.RedBlackDelete(tree.getRoot());
 //        endTime1 = System.nanoTime();
 //        timeElapsed1 = endTime1 - startTime1;
 
-        System.out.println(timeElapsed);
-        //System.out.println("Удаление \n" + (timeElapsed1));
+//        System.out.println(timeElapsed);
+//        System.out.println(timeElapsed1);
 
 //        System.out.println();
 //
@@ -167,7 +166,7 @@ public class Main {
 //        System.out.println(timeElapsed);
 //        System.out.println();
 //
-//        System.out.println("Высота дерева");
+        //System.out.println(tree.RedBlackTreeHeight(tree.getRoot()));
 //        startTime = System.nanoTime();
 //        int h = tree.RedBlackTreeHeight(tree.getRoot());
 //        endTime = System.nanoTime();
@@ -184,7 +183,7 @@ public class Main {
             tree.AVLInsert(node);
         }
         //tree.AVLDelete(tree.AVLSearch(tree.getRoot(), 3));
-        //tree.AVLPrint("", tree.getRoot(), false);
+        tree.AVLPrint("", tree.getRoot(), false);
 
         long startTime, endTime, timeElapsed = 0;
         long startTime1, endTime1, timeElapsed1 = 0;
@@ -196,17 +195,17 @@ public class Main {
 //        System.out.println(array.length);
 //        System.out.println();
 
-        node = new AVL(number);
-        startTime = System.nanoTime();
-        tree.AVLInsert(node);
-        endTime = System.nanoTime();
-        timeElapsed = endTime - startTime;
+//        node = new AVL(number);
+//        startTime = System.nanoTime();
+//        tree.AVLInsert(node);
+//        endTime = System.nanoTime();
+//        timeElapsed = endTime - startTime;
 //        startTime1 = System.nanoTime();
 //        tree.AVLDelete(tree.AVLSearch(tree.getRoot(), number));
 //        endTime1 = System.nanoTime();
 //        timeElapsed1 = endTime1 - startTime1;
 
-        System.out.println(timeElapsed);
+//        System.out.println(timeElapsed);
 //        System.out.println("Удаление \n" + (timeElapsed1));
 //
 //
@@ -248,22 +247,46 @@ public class Main {
 //        int h = tree.AVLTreeHeight(tree.getRoot());
 //        endTime = System.nanoTime();
 //        timeElapsed = endTime - startTime;
-//        System.out.println("Высота дерева " + timeElapsed);
+        System.out.println(tree.AVLTreeHeight(tree.getRoot()));
 //        System.out.println();
     }
 
+    public static void ForAVLTree3(int[] array, int number) {
+        AVLTree3 tree = new AVLTree3();
+
+        for (int i = 0; i < array.length; i++) {
+            tree.root = tree.insertNode(tree.root, array[i]);
+        }
+        //tree.printTree(tree.root, "", true);
+
+        long startTime, endTime, timeElapsed = 0;
+        long startTime1, endTime1, timeElapsed1 = 0;
+
+//        startTime = System.nanoTime();
+        tree.insertNode(tree.root,number);
+//        endTime = System.nanoTime();
+//        timeElapsed = endTime - startTime;
+        startTime1 = System.nanoTime();
+        tree.deleteNode(tree.root, number);
+        endTime1 = System.nanoTime();
+        timeElapsed1 = endTime1 - startTime1;
+
+//        System.out.println(timeElapsed);
+        System.out.println(timeElapsed1);
+//        System.out.println(tree.height(tree.root));
+    }
+
+
+
     public static void main(String[] args) throws IOException {
         List<int[]> a = new ArrayList<int[]>();
-        System.out.println("Размеры массивов");
+        //int[] array = {7, 5, 10, 3, 2, 8, 9, 6, 1, 4};
+//        int[] array = Array(20);
+//        a.add(array);
         for (int n = 10000; n < 1000001; n += 10000) {
-            System.out.println(n);
             int[] array = Array(n);
             a.add(array);
         }
-
-//        int[] a = {1,2,3,4,5,6,7,8};
-//        int c = 9;
-//        ForAVLTree(a, c);
 
 //        System.out.println();
 //        System.out.println("Бинарное");
@@ -272,7 +295,7 @@ public class Main {
 //            int c = a.get(i).length+1;
 //            ForBinaryTree(a.get(i), c);
 //        }
-//
+
 //        System.out.println();
 //        System.out.println("КЧ");
 //        System.out.println();
@@ -286,7 +309,7 @@ public class Main {
         System.out.println();
         for (int i = 0; i < a.size(); i++) {
             int c = a.get(i).length+1;
-            ForAVLTree(a.get(i), c);
+            ForAVLTree3(a.get(i), c);
         }
     }
 }

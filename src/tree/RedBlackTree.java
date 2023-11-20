@@ -58,48 +58,36 @@ public class RedBlackTree {
     }
 
     public void RedBlackFixInsert(RedBlack node) {
-        RedBlack parent = node.parent;
-        while (node != this.root && !parent.black) {
-            RedBlack grandfather = parent.parent;
-            if (grandfather.left_child == parent) {
-                RedBlack uncle = grandfather.right_child;
-                if (uncle != null && !uncle.black) {
-                    parent.black = true;
-                    uncle.black = true;
-                    grandfather.black = false;
-                    node = grandfather;
-                    parent = node.parent;
+        while (node.parent != null && node.parent.parent != null && !node.parent.black) {
+            if (node.parent.parent.left_child == node.parent) {
+                if (node.parent.parent.right_child != null && !node.parent.parent.right_child.black) {
+                    node.parent.black = true;
+                    node.parent.parent.right_child.black = true;
+                    node.parent.parent.black = false;
+                    node = node.parent.parent;
                 } else {
-                    if (parent.right_child == node) {
-                        RedBlackRightRotation(parent);
-                        RedBlack c = parent;
-                        parent = node;
-                        node = c;
+                    if (node.parent.right_child == node) {
+                        node = node.parent;
+                        RedBlackLeftRotation(node);
                     }
-                    RedBlackRightRotation(grandfather);
-                    grandfather.black = false;
-                    parent.black = true;
-                    break;
+                    node.parent.parent.black = false;
+                    node.parent.black = true;
+                    RedBlackRightRotation(node.parent.parent);
                 }
             } else {
-                RedBlack uncle = grandfather.left_child;
-                if (uncle != null && !uncle.black) {
-                    grandfather.black = false;
-                    parent.black = true;
-                    uncle.black = true;
-                    node = grandfather;
-                    parent = node.parent;
+                if (node.parent.parent.left_child != null && !node.parent.parent.left_child.black) {
+                    node.parent.parent.black = false;
+                    node.parent.black = true;
+                    node.parent.parent.left_child.black = true;
+                    node = node.parent.parent;
                 } else {
-                    if (parent.left_child == node) {
-                        RedBlackRightRotation(grandfather);
-                        RedBlack c = parent;
-                        parent = node;
-                        node = c;
+                    if (node.parent.left_child == node) {
+                        node = node.parent;
+                        RedBlackRightRotation(node);
                     }
-                    RedBlackLeftRotation(grandfather);
-                    parent.black = true;
-                    grandfather.black = false;
-                    break;
+                    node.parent.black = true;
+                    node.parent.parent.black = false;
+                    RedBlackLeftRotation(node.parent.parent);
                 }
             }
         }
@@ -286,14 +274,15 @@ public class RedBlackTree {
 
     //правый поворот
     public void RedBlackRightRotation(RedBlack node) {
-        if (node.left_child == null || node.left_child.right_child == null) return;
         RedBlack b = node.left_child;
         node.left_child = b.right_child;
         if (b.right_child != null) b.right_child.parent = node;
         b.parent = node.parent;
         if (node == this.root) this.root = b;
-        else if (node == node.parent.right_child) node.parent.right_child = b;
-        else node.parent.left_child = b;
+        else {
+            if (node == node.parent.right_child) node.parent.right_child = b;
+            else node.parent.left_child = b;
+        }
         b.right_child = node;
         node.parent = b;
     }
@@ -305,8 +294,10 @@ public class RedBlackTree {
         if (b.left_child != null) b.left_child.parent = node;
         b.parent = node.parent;
         if (node.parent == null) this.root = b;
-        else if (node == node.parent.left_child) node.parent.left_child = b;
-        else node.parent.right_child = b;
+        else {
+            if (node == node.parent.left_child) node.parent.left_child = b;
+            else node.parent.right_child = b;
+        }
         b.left_child = node;
         node.parent = b;
     }
@@ -336,10 +327,10 @@ public class RedBlackTree {
         else {
             if (left) pr += "l ";
             else pr += "r ";
-//            System.out.print(pr);
-//            if (node.black) System.out.print(" black ");
-//            else System.out.print(" red ");
-            //System.out.println(node.key);
+            System.out.print(pr);
+            if (node.black) System.out.print(" black ");
+            else System.out.print(" red ");
+            System.out.println(node.key);
             RedBlackPrint(pr, node.right_child, false);
             RedBlackPrint(pr, node.left_child, true);
         }
