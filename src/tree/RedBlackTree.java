@@ -232,7 +232,7 @@ public class RedBlackTree {
     public void RedBlackCurrentLevel(RedBlack root, int level) {
         if (root == null) return;
         if (level == 1) {
-            int i = root.key;
+            System.out.println(root.key);
         }
         else if (level > 1) {
             RedBlackCurrentLevel(root.left_child, level - 1);
@@ -244,7 +244,7 @@ public class RedBlackTree {
     //обход узлов в порядке: вершина, левое поддерево, правое поддерево
     public void RedBlackPreorder(RedBlack node) {
         if (node != null) {
-//            System.out.println(node.key);
+            System.out.println(node.key);
             RedBlackPreorder(node.left_child);
             RedBlackPreorder(node.right_child);
         }
@@ -256,7 +256,7 @@ public class RedBlackTree {
         if (node != null){
             RedBlackPostorder(node.left_child);
             RedBlackPostorder(node.right_child);
-//            System.out.println(node.key);
+            System.out.println(node.key);
         }
     }
 
@@ -265,9 +265,9 @@ public class RedBlackTree {
     public void RedBlackInorder(RedBlack node) {
         if (node != null) {
             RedBlackInorder(node.left_child);
-//            if (node.black) System.out.print(" black ");
-//            else System.out.print(" red ");
-//            System.out.println(node.key);
+            if (node.black) System.out.print(" black ");
+            else System.out.print(" red ");
+            System.out.println(node.key);
             RedBlackInorder(node.right_child);
         }
     }

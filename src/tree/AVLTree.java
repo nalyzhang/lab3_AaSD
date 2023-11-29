@@ -51,40 +51,25 @@ public class AVLTree {
                 }
             }
         }
-        AVLFix(node);
+        AVLFixInsert(node);
     }
 
-    public void AVLFix(AVL node) {
+    public void AVLFixInsert(AVL node) {
         if (node == null) return;
-        while (node.parent != null && node.balance != 0) {
+        while (node.parent != null) {
+            if (node == node.parent.left_child) node.parent.balance +=1;
+            if (node == node.parent.right_child) node.parent.balance -=1;
             node = node.parent;
-            node.balance = AVLTreeHeight(node.left_child) - AVLTreeHeight(node.right_child);
-            if (node.balance == 2) {
-                if (node.right_child == null || node.left_child != null) {
-                    if (node.left_child.balance == 1) AVLRightRotation(node);
-                    else if (node.left_child.balance == -1) AVLBigRightRotation(node);
-                } else {
-                    if (node.right_child.balance == -1) AVLRightRotation(node);
-                    else if (node.right_child.balance == 1) AVLBigRightRotation(node);
-                }
-            } else if (node.balance == -2) {
-                if(node.right_child != null || node.left_child == null) {
-                    if (node.right_child.balance == 1) AVLLeftRotation(node);
-                    else if (node.right_child.balance == -1) AVLBigLeftRotation(node);
-                } else {
-                    if (node.left_child.balance == -1) AVLLeftRotation(node);
-                    else if (node.left_child.balance == 1) AVLBigLeftRotation(node);
-
-                }
-            }
-            if (node.left_child != null && node.balance == 2 && node.left_child.balance == 1) AVLRightRotation(node);
-            else if (node.left_child != null && node.balance == 2 && node.left_child.balance == -1) AVLBigRightRotation(node);
-            else if (node.left_child != null && node.balance == -2 && node.left_child.balance == 1) AVLLeftRotation(node);
-            else if (node.left_child != null && node.balance == -2 && node.left_child.balance == -1) AVLBigLeftRotation(node);
+            if (node.balance == 2 && node.left_child.balance == 1)AVLRightRotation(node);
+            else if (node.balance == 2 && node.left_child.balance == -1)AVLBigRightRotation(node);
+            else if (node.balance == -2 && node.right_child.balance == -1) AVLLeftRotation(node);
+            else if (node.balance == -2 && node.right_child.balance == 1) AVLBigLeftRotation(node);
+            if (node.balance == 0) break;
         }
     }
 
     public void AVLDelete(AVL node) {
+        AVLFixDelete(node);
         AVL parent = node.parent;
         // 1 - удаляемый эл-т - лист
         if (node.left_child == null && node.right_child == null) {
@@ -117,10 +102,21 @@ public class AVLTree {
         }
     }
 
+    public void AVLFixDelete(AVL node) {
+        if (node == null) return;
+        while (node.parent != null) {
+            if (node == node.parent.left_child) node.parent.balance -=1;
+            if (node == node.parent.right_child) node.parent.balance +=1;
+            node = node.parent;
+            if (node.balance == 2) AVLRightRotation(node);
+            else if (node.balance == -2) AVLLeftRotation(node);
+        }
+    }
 
     //правый поворот
     public void AVLRightRotation(AVL node) {
-        if (node == null || node.left_child == null) return;
+        node.balance -= 2;
+        node.left_child.balance -= 1;
         AVL b = node.left_child;
         node.left_child = b.right_child;
         if (b.right_child != null) b.right_child.parent = node;
@@ -134,7 +130,8 @@ public class AVLTree {
 
     //левый поворот
     public void AVLLeftRotation(AVL node) {
-        if (node == null || node.right_child == null) return;
+        node.balance += 2;
+        node.right_child.balance += 1;
         AVL b = node.right_child;
         node.right_child = b.left_child;
         if (b.left_child != null) b.left_child.parent = node;
@@ -148,13 +145,13 @@ public class AVLTree {
 
     //большой правый поворот
     public void AVLBigRightRotation(AVL node) {
-        AVLLeftRotation(node.right_child);
+        AVLLeftRotation(node.left_child);
         AVLRightRotation(node);
     }
 
     //большой левый
     public void AVLBigLeftRotation(AVL node) {
-        AVLRightRotation(node.left_child);
+        AVLRightRotation(node.right_child);
         AVLLeftRotation(node);
     }
 
@@ -248,7 +245,7 @@ public class AVLTree {
             if (left) pr += "l ";
             else pr += "r ";
             System.out.print(pr);
-            System.out.println(node.key);
+            System.out.println(node.key + " " + node.balance);
             AVLPrint(pr, node.right_child, false);
             AVLPrint(pr, node.left_child, true);
         }
@@ -277,6 +274,27 @@ public class AVLTree {
 
 /*
  кладбище
+
+
+             if (node.balance == 2) {
+                if (node.right_child == null || node.left_child != null) {
+                    if (node.left_child.balance == 1) AVLRightRotation(node);
+                    else if (node.left_child.balance == -1) AVLBigRightRotation(node);
+                } else {
+                    if (node.right_child.balance == -1) AVLRightRotation(node);
+                    else if (node.right_child.balance == 1) AVLBigRightRotation(node);
+                }
+            } else if (node.balance == -2) {
+                if(node.right_child != null || node.left_child == null) {
+                    if (node.right_child.balance == 1) AVLLeftRotation(node);
+                    else if (node.right_child.balance == -1) AVLBigLeftRotation(node);
+                } else {
+                    if (node.left_child.balance == -1) AVLLeftRotation(node);
+                    else if (node.left_child.balance == 1) AVLBigLeftRotation(node);
+
+                }
+            }
+            node.left_child != null &&
 
 
     int getBalanceFactor(AVL N) {

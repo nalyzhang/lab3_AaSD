@@ -122,7 +122,7 @@ public class BinaryTree {
     public void BinaryCurrentLevel(Binary root, int level) {
         if (root == null) return;
         if (level == 1) {
-            int i = root.key;
+            System.out.println(root.key);
         }
         else if (level > 1) {
             BinaryCurrentLevel(root.left_child, level - 1);
@@ -134,7 +134,7 @@ public class BinaryTree {
     //обход узлов в порядке: вершина, левое поддерево, правое поддерево
     public void BinaryPreorder(Binary node) {
         if (node != null) {
-            //System.out.println(node.key);
+            System.out.println(node.key);
             BinaryPreorder(node.left_child);
             BinaryPreorder(node.right_child);
         }
@@ -146,7 +146,7 @@ public class BinaryTree {
         if (node != null){
             BinaryPostorder(node.left_child);
             BinaryPostorder(node.right_child);
-            //System.out.println(node.key);
+            System.out.println(node.key);
         }
     }
 
@@ -155,7 +155,7 @@ public class BinaryTree {
     public void BinaryInorder(Binary node) {
         if (node != null) {
             BinaryInorder(node.left_child);
-            //System.out.println(node.key);
+            System.out.println(node.key);
             BinaryInorder(node.right_child);
         }
     }

@@ -54,7 +54,6 @@ class AVLTree3 {
     // Insert a node
     Node insertNode(Node node, int item) {
 
-        // Find the position and insert the node
         if (node == null)
             return (new Node(item));
         if (item < node.item)
@@ -64,8 +63,6 @@ class AVLTree3 {
         else
             return node;
 
-        // Update the balance factor of each node
-        // And, balance the tree
         node.height = 1 + max(height(node.left), height(node.right));
         int balanceFactor = getBalanceFactor(node);
         if (balanceFactor > 1) {
@@ -94,10 +91,7 @@ class AVLTree3 {
         return current;
     }
 
-    // Delete a node
     Node deleteNode(Node root, int item) {
-
-        // Find the node to be deleted and remove it
         if (root == null)
             return root;
         if (item < root.item)
@@ -124,8 +118,6 @@ class AVLTree3 {
         }
         if (root == null)
             return root;
-
-        // Update the balance factor of each node and balance the tree
         root.height = max(height(root.left), height(root.right)) + 1;
         int balanceFactor = getBalanceFactor(root);
         if (balanceFactor > 1) {
@@ -160,15 +152,62 @@ class AVLTree3 {
         if (currPtr != null) {
             System.out.print(indent);
             if (last) {
-                System.out.print("R ");
-                indent += "R ";
+                System.out.print("r ");
+                indent += "r ";
             } else {
-                System.out.print("L ");
-                indent += "L ";
+                System.out.print("l ");
+                indent += "l ";
             }
             System.out.println(currPtr.item);
             printTree(currPtr.left, indent, false);
             printTree(currPtr.right, indent, true);
+        }
+    }
+
+    //обход в ширину
+    public void AVLWidthTraversal() {
+        int h = height(this.root);
+        for (int i = 1; i <= h; i++) AVLCurrentLevel(this.root, i);
+    }
+
+    public void AVLCurrentLevel(Node root, int level) {
+        if (root == null) return;
+        if (level == 1) {
+            System.out.println(root.item);
+        }
+        else if (level > 1) {
+            AVLCurrentLevel(root.left, level - 1);
+            AVLCurrentLevel(root.right, level - 1);
+        }
+    }
+
+    //прямой обход в глубину
+    //обход узлов в порядке: вершина, левое поддерево, правое поддерево
+    public void AVLPreorder(Node node) {
+        if (node != null) {
+            System.out.println(node.item);
+            AVLPreorder(node.left);
+            AVLPreorder(node.right);
+        }
+    }
+
+    // обратный обход в глубину
+    // обход узлов в порядке: левое поддерево, правое поддерево, вершина
+    public void AVLPostorder(Node node) {
+        if (node != null){
+            AVLPostorder(node.left);
+            AVLPostorder(node.right);
+            System.out.println(node.item);
+        }
+    }
+
+    //симметричный обход в глубину
+    // обход узлов в отсортированном порядке
+    public void AVLInorder(Node node) {
+        if (node != null) {
+            AVLInorder(node.left);
+            System.out.println(node.item);
+            AVLInorder(node.right);
         }
     }
 }

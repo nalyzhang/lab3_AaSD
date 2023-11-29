@@ -35,6 +35,7 @@ public class Main {
             tree.BinaryInsert(node);
         }
         tree.BinaryPrint("",tree.getRoot(),false);
+        System.out.println();
 
         long startTime, endTime, timeElapsed;
         Binary node;
@@ -44,13 +45,13 @@ public class Main {
 //        tree.BinaryInsert(node);
 //        endTime = System.nanoTime();
 //        timeElapsed = endTime - startTime;
-        startTime = System.nanoTime();
-        tree.BinaryDelete(tree.getRoot());
-        endTime = System.nanoTime();
-        timeElapsed = endTime - startTime;
+//        startTime = System.nanoTime();
+//        tree.BinaryDelete(tree.getRoot());
+//        endTime = System.nanoTime();
+//        timeElapsed = endTime - startTime;
 
 //        System.out.println(timeElapsed);
-        System.out.println(timeElapsed);
+//        System.out.println(timeElapsed);
 
         //System.out.println("Максимальное значение: " + tree.BinaryMaximum(tree.getRoot()).key);
         //System.out.println("Минимальное значение: " + tree.BinaryMinimum(tree.getRoot()).key);
@@ -58,36 +59,20 @@ public class Main {
 
 //        System.out.println();
 //
-//        System.out.println("Прямой обход в глубину");
-//        startTime = System.nanoTime();
-//        tree.BinaryPreorder(tree.getRoot());
-//        endTime = System.nanoTime();
-//        timeElapsed = endTime - startTime;
-//        System.out.println(timeElapsed);
-//        System.out.println();
-//
-//        System.out.println("Обратный обход в глубину");
-//        startTime = System.nanoTime();
-//        tree.BinaryPostorder(tree.getRoot());
-//        endTime = System.nanoTime();
-//        timeElapsed = endTime - startTime;
-//        System.out.println(timeElapsed);
-//        System.out.println();
-//
-//        System.out.println("Симметричный обход в глубину");
-//        startTime = System.nanoTime();
-//        tree.BinaryInorder(tree.getRoot());
-//        endTime = System.nanoTime();
-//        timeElapsed = endTime - startTime;
-//        System.out.println(timeElapsed);
-//        System.out.println();
-//
-//        System.out.println("Обход в ширину: ");
-//        startTime = System.nanoTime();
-//        tree.BinaryWidthTraversal();
-//        endTime = System.nanoTime();
-//        timeElapsed = endTime - startTime;
-//        System.out.println(timeElapsed);
+        System.out.println("Прямой обход в глубину");
+        tree.BinaryPreorder(tree.getRoot());
+        System.out.println();
+
+        System.out.println("Обратный обход в глубину");
+        tree.BinaryPostorder(tree.getRoot());
+        System.out.println();
+
+        System.out.println("Симметричный обход в глубину");
+        tree.BinaryInorder(tree.getRoot());
+        System.out.println();
+
+        System.out.println("Обход в ширину: ");
+        tree.BinaryWidthTraversal();
 
 //        System.out.println();
 //        tree.BinaryPrintSuccessor(tree.getRoot());
@@ -110,18 +95,19 @@ public class Main {
         for (int i = 1; i < array.length; i++) {
             RedBlack node = new RedBlack(array[i]);
             tree.RedBlackInsert(node);
-//            tree.RedBlackPrint("", tree.getRoot(), false);
 //            System.out.println();
         }
+        tree.RedBlackPrint("", tree.getRoot(), false);
+        System.out.println();
         //tree.RedBlackDelete(tree.RedBlackSearch(tree.getRoot(), 4));
 
         long startTime, endTime, timeElapsed = 0;
         long startTime1, endTime1, timeElapsed1 = 0;
         RedBlack node;
 
-        node = new RedBlack(number);
+//        node = new RedBlack(number);
 //        startTime = System.nanoTime();
-        tree.RedBlackInsert(node);
+//        tree.RedBlackInsert(node);
 //        endTime = System.nanoTime();
 //        timeElapsed = endTime - startTime;
 //        startTime1 = System.nanoTime();
@@ -133,39 +119,22 @@ public class Main {
 //        System.out.println(timeElapsed1);
 
 //        System.out.println();
-//
-//        System.out.println("Прямой обход в глубину");
-//        startTime = System.nanoTime();
-//        tree.RedBlackPreorder(tree.getRoot());
-//        endTime = System.nanoTime();
-//        timeElapsed = endTime - startTime;
-//        System.out.println(timeElapsed);
-//        System.out.println();
-//
-//        System.out.println("Обратный обход в глубину");
-//        startTime = System.nanoTime();
-//        tree.RedBlackPostorder(tree.getRoot());
-//        endTime = System.nanoTime();
-//        timeElapsed = endTime - startTime;
-//        System.out.println(timeElapsed);
-//        System.out.println();
-//
-//        System.out.println("Симметричный обход в глубину");
-//        startTime = System.nanoTime();
-//        tree.RedBlackInorder(tree.getRoot());
-//        endTime = System.nanoTime();
-//        timeElapsed = endTime - startTime;
-//        System.out.println(timeElapsed);
-//        System.out.println();
-//
-//        System.out.println("Обход в ширину: ");
-//        startTime = System.nanoTime();
-//        tree.RedBlackWidthTraversal();
-//        endTime = System.nanoTime();
-//        timeElapsed = endTime - startTime;
-//        System.out.println(timeElapsed);
-//        System.out.println();
-//
+
+        System.out.println("Прямой обход в глубину");
+        tree.RedBlackPreorder(tree.getRoot());
+        System.out.println();
+
+        System.out.println("Обратный обход в глубину");
+        tree.RedBlackPostorder(tree.getRoot());
+        System.out.println();
+
+        System.out.println("Симметричный обход в глубину");
+        tree.RedBlackInorder(tree.getRoot());
+        System.out.println();
+
+        System.out.println("Обход в ширину: ");
+        tree.RedBlackWidthTraversal();
+
         //System.out.println(tree.RedBlackTreeHeight(tree.getRoot()));
 //        startTime = System.nanoTime();
 //        int h = tree.RedBlackTreeHeight(tree.getRoot());
@@ -181,9 +150,16 @@ public class Main {
         for (int i = 1; i < array.length; i++) {
             AVL node = new AVL(array[i]);
             tree.AVLInsert(node);
+//            tree.AVLPrint("", tree.getRoot(), false);
+//            System.out.println();
         }
         //tree.AVLDelete(tree.AVLSearch(tree.getRoot(), 3));
-        tree.AVLPrint("", tree.getRoot(), false);
+//        tree.AVLPrint("", tree.getRoot(), false);
+//        System.out.println();
+
+//        tree.AVLDelete(tree.AVLSearch(tree.getRoot(), 60));
+//        tree.AVLPrint("", tree.getRoot(), false);
+//        System.out.println();
 
         long startTime, endTime, timeElapsed = 0;
         long startTime1, endTime1, timeElapsed1 = 0;
@@ -257,31 +233,50 @@ public class Main {
         for (int i = 0; i < array.length; i++) {
             tree.root = tree.insertNode(tree.root, array[i]);
         }
-        //tree.printTree(tree.root, "", true);
+        tree.printTree(tree.root, "", true);
+        System.out.println();
 
         long startTime, endTime, timeElapsed = 0;
         long startTime1, endTime1, timeElapsed1 = 0;
 
 //        startTime = System.nanoTime();
-        tree.insertNode(tree.root,number);
+//        tree.insertNode(tree.root,number);
 //        endTime = System.nanoTime();
 //        timeElapsed = endTime - startTime;
-        startTime1 = System.nanoTime();
-        tree.deleteNode(tree.root, number);
-        endTime1 = System.nanoTime();
-        timeElapsed1 = endTime1 - startTime1;
+//        startTime1 = System.nanoTime();
+//        tree.deleteNode(tree.root, number);
+//        endTime1 = System.nanoTime();
+//        timeElapsed1 = endTime1 - startTime1;
 
 //        System.out.println(timeElapsed);
-        System.out.println(timeElapsed1);
+//        System.out.println(timeElapsed1);
 //        System.out.println(tree.height(tree.root));
+
+        System.out.println("Прямой обход в глубину");
+        tree.AVLPreorder(tree.root);
+        System.out.println();
+
+        System.out.println("Обратный обход в глубину");
+        tree.AVLPostorder(tree.root);
+        System.out.println();
+
+        System.out.println("Симметричный обход в глубину");
+        tree.AVLInorder(tree.root);
+        System.out.println();
+
+        System.out.println("Обход в ширину: ");
+        tree.AVLWidthTraversal();
     }
 
 
 
     public static void main(String[] args) throws IOException {
         List<int[]> a = new ArrayList<int[]>();
-        //int[] array = {7, 5, 10, 3, 2, 8, 9, 6, 1, 4};
-//        int[] array = Array(20);
+//        int[] array = {7, 8, 1, 10, 6, 5, 2, 4,3,9};
+        //7, 8, 1, 10, 6, 5, 2, 4, 3, 9
+//        int[] array = Array(10);
+//        for (int n = 0; n < 10; n++) System.out.print(array[n] + ", ");
+//        System.out.println();
 //        a.add(array);
         for (int n = 10000; n < 1000001; n += 10000) {
             int[] array = Array(n);
@@ -295,7 +290,7 @@ public class Main {
 //            int c = a.get(i).length+1;
 //            ForBinaryTree(a.get(i), c);
 //        }
-
+//
 //        System.out.println();
 //        System.out.println("КЧ");
 //        System.out.println();
@@ -309,7 +304,7 @@ public class Main {
         System.out.println();
         for (int i = 0; i < a.size(); i++) {
             int c = a.get(i).length+1;
-            ForAVLTree3(a.get(i), c);
+            ForAVLTree(a.get(i), c);
         }
     }
 }
