@@ -55,22 +55,49 @@ public class AVLTree {
     }
 
     public void AVLFixInsert(AVL node) {
+//        System.out.println("\nbefore:");
+//        AVLPrint("", getRoot(), false);
+//        System.out.println("\nafter:");
         if (node == null) return;
         while (node.parent != null) {
             if (node == node.parent.left_child) node.parent.balance +=1;
             if (node == node.parent.right_child) node.parent.balance -=1;
             node = node.parent;
-            if (node.balance == 2 && node.left_child.balance == 1)AVLRightRotation(node);
-            else if (node.balance == 2 && node.left_child.balance == -1)AVLBigRightRotation(node);
-            else if (node.balance == -2 && node.right_child.balance == -1) AVLLeftRotation(node);
-            else if (node.balance == -2 && node.right_child.balance == 1) AVLBigLeftRotation(node);
+            if (node.balance == 2 && node.left_child.balance == 1) {
+//                System.out.println("RR");
+                AVLRightRotation(node);
+                node.parent.balance = 0;
+                node.balance = 0;
+            }
+            else if (node.balance == 2 && node.left_child.balance == -1) {
+//                System.out.println("BRR");
+                AVLBigRightRotation(node);
+                node = node.parent;
+                node.balance = (AVLTreeHeight(node.left_child) - AVLTreeHeight(node.right_child));
+                node.right_child.balance = (AVLTreeHeight(node.left_child.left_child) - AVLTreeHeight(node.left_child.right_child));
+                node.left_child.balance = AVLTreeHeight(node.right_child.left_child) - AVLTreeHeight(node.right_child.right_child);
+            }
+            else if (node.balance == -2 && node.right_child.balance == -1) {
+//                System.out.println("LR");
+                AVLLeftRotation(node);
+                node.parent.balance = 0;
+                node.balance = 0;
+            }
+            else if (node.balance == -2 && node.right_child.balance == 1) {
+//                System.out.println("BLR");
+                AVLBigLeftRotation(node);
+                node = node.parent;
+                node.balance = (AVLTreeHeight(node.left_child) - AVLTreeHeight(node.right_child));
+                node.right_child.balance = (AVLTreeHeight(node.left_child.left_child) - AVLTreeHeight(node.left_child.right_child));
+                node.left_child.balance = AVLTreeHeight(node.right_child.left_child) - AVLTreeHeight(node.right_child.right_child);
+            }
             if (node.balance == 0) break;
         }
     }
 
     public void AVLDelete(AVL node) {
         AVLFixDelete(node);
-        AVL parent = node.parent;
+        AVL parent = (node.parent == null ? node.parent : null);
         // 1 - удаляемый эл-т - лист
         if (node.left_child == null && node.right_child == null) {
             if (parent.left_child == node) parent.left_child = null;
@@ -115,8 +142,6 @@ public class AVLTree {
 
     //правый поворот
     public void AVLRightRotation(AVL node) {
-        node.balance -= 2;
-        node.left_child.balance -= 1;
         AVL b = node.left_child;
         node.left_child = b.right_child;
         if (b.right_child != null) b.right_child.parent = node;
@@ -130,8 +155,6 @@ public class AVLTree {
 
     //левый поворот
     public void AVLLeftRotation(AVL node) {
-        node.balance += 2;
-        node.right_child.balance += 1;
         AVL b = node.right_child;
         node.right_child = b.left_child;
         if (b.left_child != null) b.left_child.parent = node;
@@ -186,13 +209,16 @@ public class AVLTree {
     //обход в ширину
     public void AVLWidthTraversal() {
         int h = AVLTreeHeight(this.root);
-        for (int i = 1; i <= h; i++) AVLCurrentLevel(this.root, i);
+        for (int i = 1; i <= h; i++) {
+            AVLCurrentLevel(this.root, i);
+            System.out.println();
+        }
     }
 
     public void AVLCurrentLevel(AVL root, int level) {
         if (root == null) return;
         if (level == 1) {
-            int i = root.key;
+            System.out.print(root.key + " ");
         }
         else if (level > 1) {
             AVLCurrentLevel(root.left_child, level - 1);

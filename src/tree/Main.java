@@ -153,8 +153,8 @@ public class Main {
 //            tree.AVLPrint("", tree.getRoot(), false);
 //            System.out.println();
         }
-        //tree.AVLDelete(tree.AVLSearch(tree.getRoot(), 3));
-//        tree.AVLPrint("", tree.getRoot(), false);
+//        tree.AVLDelete(tree.AVLSearch(tree.getRoot(), 3));
+        tree.AVLPrint("", tree.getRoot(), false);
 //        System.out.println();
 
 //        tree.AVLDelete(tree.AVLSearch(tree.getRoot(), 60));
@@ -227,6 +227,37 @@ public class Main {
 //        System.out.println();
     }
 
+    public static void ForAVLTree2(int[] array, int number) {
+        AVLTree2 tree = new AVLTree2(array[0]);
+
+        for (int i = 1; i < array.length; i++) {
+            AVL2 node = new AVL2(array[i]);
+            tree.AVLInsert(node);
+//            tree.AVLPrint("", tree.getRoot(), false);
+//            System.out.println();
+        }
+//        tree.AVLDelete(tree.AVLSearch(tree.getRoot(), 3));
+//        tree.AVLPrint("", tree.getRoot(), false);
+//        System.out.println();
+
+//        tree.AVLDelete(tree.AVLSearch(tree.getRoot(), 60));
+//        tree.AVLPrint("", tree.getRoot(), false);
+//        System.out.println();
+
+//        long startTime, endTime, timeElapsed;
+//        AVL2 node;
+//        node = new AVL2(number);
+//        startTime = System.nanoTime();
+//        tree.AVLInsert(node);
+//        tree.AVLDelete(tree.getRoot());
+//        endTime = System.nanoTime();
+//        timeElapsed = endTime - startTime;
+//        System.out.println(timeElapsed);
+
+        System.out.println(tree.AVLTreeHeight(tree.getRoot()));
+    }
+
+
     public static void ForAVLTree3(int[] array, int number) {
         AVLTree3 tree = new AVLTree3();
 
@@ -272,12 +303,14 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         List<int[]> a = new ArrayList<int[]>();
-//        int[] array = {7, 8, 1, 10, 6, 5, 2, 4,3,9};
+//        int[] array = {19, 17, 18, 6, 10, 16, 4, 2, 5, 9, 3, 8, 11, 14, 1, 7, 15, 12, 20, 13};
         //7, 8, 1, 10, 6, 5, 2, 4, 3, 9
-//        int[] array = Array(10);
-//        for (int n = 0; n < 10; n++) System.out.print(array[n] + ", ");
+
+
 //        System.out.println();
+//        int[] array = Array(20);
 //        a.add(array);
+//        for (int n = 0; n < array.length; n++) System.out.print(array[n] + ", ");
         for (int n = 10000; n < 1000001; n += 10000) {
             int[] array = Array(n);
             a.add(array);
@@ -304,7 +337,7 @@ public class Main {
         System.out.println();
         for (int i = 0; i < a.size(); i++) {
             int c = a.get(i).length+1;
-            ForAVLTree(a.get(i), c);
+            ForAVLTree2(a.get(i), c);
         }
     }
 }
